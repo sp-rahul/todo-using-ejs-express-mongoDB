@@ -1,0 +1,106 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>TODO LIST</title>
+<link rel="stylesheet" href="style.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+ <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+
+
+</head>
+<body>
+<div class="container">
+<form action="/" method="POST" autocomplete="off" >
+<div id="myDIV" class="header">
+    <h2> <%= kindOfDay %> </h2>
+  <h2 class="Title">TODO</h2>
+  <input type="text" id="myInput" placeholder="Add Todos....." name="todoValue" required>
+  <button type="submit" class="addBtn"> Add Item </button>
+</div>
+
+
+</form>
+
+
+<ul id="myUL">
+
+  <% for (item of todos) { %>
+ 
+    <li contenteditable="true"  > <%= item.title %>
+
+	 
+      <button class="delete" contenteditable="false" onclick="myFunction('<%= item._id %>')">Delete</button>
+	   <button class="update" contenteditable="false" onclick="myUpdateFunction('<%= item._id %>')">Update</button>
+	 
+    </li>
+	
+	
+  <% } %>
+  
+</ul>
+
+</div>
+
+
+<script>
+
+function myFunction(id) {
+console.log("id:", id ) ;
+ console.log("delete clicked")
+ fetch(id, {
+  method: "DELETE"
+ })
+ window.location.href = "/"
+}
+//update todo
+
+function myUpdateFunction(id) {
+console.log("Update clicked")
+ fetch(id, {
+  method: "PUT",
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({title: todos.getElementById})
+ })
+ window.location.href = "/"
+
+}
+
+//line through
+
+
+
+  //  const deleteButton = document.querySelectorAll(".todo-delete")
+  //  deleteButton.forEach((button,i)=> {
+   
+  //  button.addEventListener("click",()=>{
+  //  const endPoint = `/${button.classList}`
+  //  console.log(endPoint);
+  //  })
+   
+  //  })
+   
+  //  const handleDeleteTodo=()=>{
+  //  console.log("delete clicked")
+  //  }
+
+
+  // function myFunction(id) {
+  //   if (confirm('Are you sure you want to delete this todo item?')) {
+  //     fetch('/todos/' + id, {
+  //       method: 'DELETE'
+  //     })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         window.location.reload();
+  //       }
+  //     })
+  //     .catch(error => console.log(error));
+  //   }
+  // }
+
+ 
+</script>
+</body>
+
+</html>
