@@ -6,7 +6,7 @@ const todoSchema = new Schema({
 		type: String,
 		required: true
 	}
-})
+},{ timestamps: true })
 const todo = mongoose.model("todo", todoSchema);
 
 module.exports = todo;

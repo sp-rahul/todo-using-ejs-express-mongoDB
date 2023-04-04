@@ -1,5 +1,4 @@
 const express = require("express")
-
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const Todo = require("./models/todo")
@@ -23,29 +22,43 @@ try {
 }
 dbConnection();
 
-app.get('/',async(req,res)=>{
+app.get('/', async(req,res)=>{
 	try{
+
 	var today = new Date();
 
-  var options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  };
+    var options = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+    };
 
-  var day = today.toLocaleDateString("en-US", options)
+    var day = today.toLocaleDateString("en-US", options)
   
   
 	const todos = await Todo.find({});
-	res.render("index", {todos:todos, kindOfDay: day})
+	    res.render("index", {todos:todos,   kindOfDay: day})
 	}catch (e){
-		console.log(e.message);
+		 console.log(e.message);
+	}
+	
+
+})
+
+app.get('/:id', async(req,res)=>{
+	try{
+	const {id} = req.params;
+  
+	const todo = await Todo.findOne({_id: id});
+	    res.render("edit", {todo:todo})
+	}catch (e){
+		 console.log(e.message);
 	}
 	
 
 })
 //findALL =>[{todo:''},{todo:''}{todo:''}]
-app.post('/',async(req,res)=>{
+app.post('/', async(req,res)=>{
 	try{
 	const todo =  new Todo({
 		title: req.body.todoValue,
@@ -72,16 +85,23 @@ app.delete('/:id', async(req,res)=>{
 	
 })
 
-app.put('/:id', async(req,res)=>{
+// Update data
+app.put('/:id', async (req, res) => {
 	try{
-	const data={todo: req.body.todo,}
-    await Todo.findByIdAndUpdate(req.params.id,{data});
-	}catch (e){
-		console.log(e.message);
+		console.log('req param',req.params)
+		console.log('req body',req.body)
+		const {id} = req.params;
+		const data = req.body;
+		console.log("data: ", data);
+		console.log("id: ", id);
+		const result = await Todo.findByIdAndUpdate(id,data,{new: true});
+		res.status(200).json(result);
+	}catch(error){
+		console.log(error.message);
 	}
-
-	
 })
+
+
 
 
 

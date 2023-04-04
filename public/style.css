@@ -88,7 +88,7 @@ ul li .delete {
   background-color: #f44336;
   color: white;
 }
-ul li .update{
+ul li .edit{
 	position: absolute;
 	right: 75px;
 	top: 0;
@@ -97,7 +97,7 @@ ul li .update{
 
 	
 }
-.update:hover{
+.edit:hover{
 	background-color: #00ccff;
 	color: white;
 	
@@ -167,4 +167,13 @@ input {
 
 .editable-text:hover {
   background-color: #eee;
+}
+.edit-Page{
+	 margin: 0;
+  
+}
+.container1{
+	background-color: green;
+	border: soft red:
+	
 }

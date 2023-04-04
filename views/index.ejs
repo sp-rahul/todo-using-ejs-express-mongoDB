@@ -25,18 +25,20 @@
 
 <ul id="myUL">
 
-  <% for (item of todos) { %>
+  <% todos.map((item,idx)=> { %>
+     <li > 
+		<span> <%= item.title %> </span>	 
  
-    <li contenteditable="true"  > <%= item.title %>
-
-	 
-      <button class="delete" contenteditable="false" onclick="myFunction('<%= item._id %>')">Delete</button>
-	   <button class="update" contenteditable="false" onclick="myUpdateFunction('<%= item._id %>')">Update</button>
+         <button class="delete" contenteditable="false" onclick="handleDeleteTodo('<%= item._id %>')">Delete</button>
+		 	     
+	      <button  class="edit" onclick="handleEditTitle('<%= item._id %>' )"  contenteditable="false">Update</button> 
+	    
+	  
 	 
     </li>
 	
 	
-  <% } %>
+  <% }) %>
   
 </ul>
 
@@ -44,8 +46,23 @@
 
 
 <script>
+ 
+function handleEditTitle(id){
+const lis = document.getElementById('myUL').getElementsByTagName('span');
+window.location.href = "/"+id;
+    
+    // Loop through the NodeList object. 
+    for (let i = 0; i <= lis.length - 1; i++) {
+    	console.log (lis[i].innerText );
+    }
 
-function myFunction(id) {
+
+handleUpdateTodo(id)
+
+  
+ }
+
+function handleDeleteTodo(id) {
 console.log("id:", id ) ;
  console.log("delete clicked")
  fetch(id, {
@@ -53,18 +70,9 @@ console.log("id:", id ) ;
  })
  window.location.href = "/"
 }
+
 //update todo
 
-function myUpdateFunction(id) {
-console.log("Update clicked")
- fetch(id, {
-  method: "PUT",
-     headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({title: todos.getElementById})
- })
- window.location.href = "/"
-
-}
 
 //line through
 
