@@ -1,5 +1,5 @@
 body {
-  margin: 30;
+  margin: auto;
   min-width: 250px;
   width: 60%;
   
@@ -176,4 +176,60 @@ input {
 	background-color: green;
 	border: soft red:
 	
+}
+
+
+
+
+
+
+
+
+
+
+
+.popup {
+  width: 80%;
+  padding: 15px;
+  margin: auto;
+  border: 1px solid rgb(100,82,73);
+  border-radius: 30px;
+  color: rgb(1,82,73);
+  background: white;
+  position: absolute;
+  top: 15%;
+  box-shadow: 5px 5px 5px #000;
+  z-index: 10001;
+  font-weight: 700;
+  text-align: center;
+  
+}
+
+.overlay {
+  margin: auto;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 1000;
+  display :none;
+  margin: auto;
+}
+
+
+.dialog-btn {
+  background-color:#44B78B;
+  color: white;
+  font-weight: 700;
+  border: 2px solid #44B78B;
+  border-radius: 10px;
+  height: 30px;
+  width: 30%;
+}
+.dialog-btn:hover {
+  background-color:red;
+  cursor: pointer;
 }

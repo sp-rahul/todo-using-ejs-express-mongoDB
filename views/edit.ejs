@@ -47,14 +47,11 @@ console.log(id, todo)
  .then(function(res){ console.log(res) })
  .catch(function(res){ console.log(res) })
 
- 
+ window.location.href = re.exec(window.location.href)[0];
 }
 
 
-function myFunc(){
-	event.preventDefault();
-	console.log("Reload stopped")
-}
+
 </script>
 </body>
 
