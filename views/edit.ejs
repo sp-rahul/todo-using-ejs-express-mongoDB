@@ -1,58 +1,55 @@
 <!DOCTYPE>
 <html>
+
 <head>
-<title>TODO LIST</title>
-<link rel="stylesheet" href="style.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
- <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <title>TODO LIST</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
 
 
 </head>
+
 <body>
-<div class="header">
-<form action='/'>
+  <div class="header">
+    <form action='/'>
 
-<div class="edit-Page"  > 
-  
-  <input type="textarea"  name="editedValue" id="title" value="<%= todo.title %>" />
-  
-  <button type="submit" class="addBtn"  onclick="handleUpdateTodo('<%= todo._id %>')"> Save </button>
+      <div class="edit-Page">
 
-</div>
+        <input type="textarea" name="updateTodo" id="title" value="<%= todo.title %>" />
 
+        <button type="submit" class="addBtn" onclick="handleUpdateTodo('<%= todo._id %>')"> Save </button>
 
-</form>
-
+      </div>
+    </form>
+  </div>
 
 
-</div>
+  <script>
+    function handleUpdateTodo(id) {
+      const todo = document.getElementById("title").value;
+      console.log(id, todo)
 
+      fetch(id, {
+          method: "PUT",
 
-<script>
-
-
-function handleUpdateTodo(id) {
-const todo = document.getElementById("title").value;
-
-console.log("Update function")
-console.log(id, todo)
-
- fetch(id, {
-	method: "PUT",
-  
-    headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({title:todo})
- })
- .then(function(res){ console.log(res) })
- .catch(function(res){ console.log(res) })
-
- window.location.href = re.exec(window.location.href)[0];
-}
-
-
-
-</script>
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: todo
+          })
+        })
+        .then(function(res) {
+          console.log(res)
+        })
+        .catch(function(res) {
+          console.log(res);
+          window.location.href = "/";
+        })
+    }
+  </script>
 </body>
 
 </html>

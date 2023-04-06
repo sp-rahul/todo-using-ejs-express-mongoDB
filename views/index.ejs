@@ -1,132 +1,115 @@
 <!DOCTYPE>
 <html>
+
 <head>
-<title>TODO LIST</title>
-<link rel="stylesheet" href="style.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
- <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <title>TODO LIST</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
 
 
 </head>
+
 <body>
-<div class="container">
-<form action="/" method="POST" autocomplete="off" >
-<div id="myDIV" class="header">
-    <h2> <%= kindOfDay %> </h2>
-    <h2 class="Title">TODO</h2>
-    <input type="text" id="myInput" placeholder="Add Todos....." name="todoValue" required>
-    <button type="submit" class="addBtn"> Add Item </button>
-  </div>
-</form>
+  <div class="container">
+    <form action="<%= singleTodo ? '/'+singleTodo._id+'?_method=put' : '/' %>" method="POST">
+     <!-- <form action="<%= singleTodo ? '/'+singleTodo._id : '/' %>" method="POST" enctype="application/x-www-form-urlencoded" autocomplete="off" > --> 
+
+      
+ <% if(singleTodo) { %>
+ <input type="hidden" name="_method" value="PUT">
+ <% } %> 
 
 
-<div class="overlay" id="dialog-container">
-  
-</div>
+      <div id="myDIV" class="header">
+        <h3> <%= Today %> </h3>
+        <h2 class="Title">TODO</h2>
+        <input type="text" id="myInput" placeholder="Add Todos....." name="title" value="<%= singleTodo?.title || '' %>" required>
+
+        <button type="submit" class="addBtn"> '<%= singleTodo ? 'Update Item': 'Add Item' %>'</button>
+      </div>
+    </form>
+
+    <div class="overlay" id="dialog-container">
 
 
-<ul id="myUL">
+    </div>
 
-     <%# todos.map((item,idx)=> { %>
-    
-     <%# todos.forEach(function(item) { %>
-   
-     <% for (item of todos) { %>
-   
-     <li > 
-		  <span> <%= item.title %> </span>	 
- 
-           <!--  <button class="delete" contenteditable="false" onclick="handleDeleteTodo('<%= item._id %>')">Delete</button>  -->
-		 	     
-	       <button  class="edit" onclick="handleEditTitle('<%= item._id %>' )" >Edit</button> 
-		  
-	
-		   <!--<button class="delete" onclick="if (confirm('Are you sure want to delete this Todo?')) { -->
-           <!--   event.preventDefault -->
-           <!--handleDeleteTodo('<%= item._id %>').submit(); -->
-           <!-- }else{ -->
-           <!--     event.preventDefault(); -->
-            <!--   }"> Delete</button> -->
-		 
-		 
-		 
-		  <button class="delete" contenteditable="false" onclick="handleDelete('<%= item._id %>')">Delete</button>
-	
-	
-	
-		 
-		  
-		
-	    
-	  
-	 
+
+    <div class='todos-list'>
+      <ul id="myUL">
+
+        <% todos.reverse().map((item,idx)=> { %>
+
+        <%# todos.forEach(function(item) { %>
+
+        <%# for (item of todos) { %>
+
+        <li>
+          <span> <%= item.title %> </span>
+          <a class="edit" href="/?id=<%= item._id %>">Edit</a>
+
+          <button class="delete" contenteditable="false" onclick="handleDelete('<%= item._id %>')">Delete</button>
         </li>
-	
-        	<!-- if you want to use map or forEach loop then comment out this & comment the uder " } "  %> -->
-         <%# }) %>
-         <% } %>
-  
-     </ul>
 
-</div>
+        <!-- if you want to use map or forEach loop then comment out this & comment the uder " } "  %> -->
+        <% }) %>
+        <%# } %>
+
+      </ul>
+
+    </div>
+
+  </div>
 
 
-<script>
- 
- function handleEditTitle(id){
-       const lis = document.getElementById('myUL').getElementsByTagName('span');
-       window.location.href = "/"+id;
-    
-       handleUpdateTodo(id)
-	    window.location.href = "/"
-	   
- }
-
- function handleDeleteTodo(id) {
-       console.log("id:", id ) ;
-       console.log("delete clicked")
-       fetch(id, {
-             method: "DELETE"
+  <script>
+    function handleDeleteTodo(id) {
+      console.log("id:", id);
+      console.log("delete clicked")
+      fetch(id, {
+        method: "DELETE"
       })
       window.location.href = "/"
- 
-}
 
-  
-     function handleDelete(id){
-     var overlayme = document.getElementById("dialog-container");
-	 overlayme.style.display = "block";
-	
-	 overlayme.innerHTML  =
-	 `   <div class="popup">
+    }
+
+    function handleDelete(id) {
+      var overlayme = document.getElementById("dialog-container");
+      overlayme.style.display = "block";
+
+      overlayme.innerHTML =
+        `
+	 <div class="popup-container">   
+	 <div class="popup">
             <p> Are you sure want to delete the Todo?? </p>
             <div>
                  <button class="dialog-btn btn-primary" onclick=confirm('${id}')> ok </button>
                  <button class="dialog-btn btn-cancel" onclick=cancel()> cancel </button>
            </div>
-        </div> `
-	overlayme.style.display = "block";
-  
-   }
-  
+        </div>
+		</div>		
+		`
+      overlayme.style.display = "block";
 
-function confirm(id) {
-    console.log("Called for delete func")
-	console.log(id);
-     handleDeleteTodo(id)
-	var overlayme = document.getElementById("dialog-container");
-    overlayme.style.display = "none";
-}
+    }
 
 
-function cancel() { 
-var overlayme = document.getElementById("dialog-container");
-    overlayme.style.display = "none";
-}
+    function confirm(id) {
+      console.log("Called for delete func")
+      console.log(id);
+      handleDeleteTodo(id)
+      var overlayme = document.getElementById("dialog-container");
+      overlayme.style.display = "none";
+    }
 
- 
-</script>
+
+    function cancel() {
+      var overlayme = document.getElementById("dialog-container");
+      overlayme.style.display = "none";
+    }
+  </script>
 </body>
 
 </html>

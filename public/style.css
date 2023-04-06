@@ -2,13 +2,13 @@ body {
   margin: auto;
   min-width: 250px;
   width: 60%;
-  
+
 }
 
 
 * {
   box-sizing: border-box;
- 
+
 }
 
 ul {
@@ -16,9 +16,9 @@ ul {
   padding: 0;
 }
 
-.Title{
-	margin:15px;
-	
+.Title {
+  margin: 15px;
+
 }
 
 
@@ -31,18 +31,18 @@ ul li {
   font-size: 18px;
   transition: 0.2s;
   border: 1px solid yellow;
-  margin:2px;
-  
+  margin: 2px;
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
-  
 }
- ul li.checkbox{
-	left: 0px;
- }
+
+
+ul li.checkbox {
+  left: 0px;
+}
 
 
 ul li:nth-child(odd) {
@@ -88,20 +88,22 @@ ul li .delete {
   background-color: #f44336;
   color: white;
 }
-ul li .edit{
-	position: absolute;
-	right: 75px;
-	top: 0;
-	background:  #668cff;
-	padding: 12px 16px;
 
-	
+ul li .edit {
+  position: absolute;
+  right: 75px;
+  top: 0;
+  background: #668cff;
+  padding: 12px 16px;
+
+
 }
-.edit:hover{
-	background-color: #00ccff;
-	color: white;
-	
-	 
+
+.edit:hover {
+  background-color: #00ccff;
+  color: white;
+
+
 }
 
 
@@ -110,6 +112,7 @@ ul li .edit{
   padding: 30px 40px;
   color: white;
   text-align: center;
+
 }
 
 
@@ -123,7 +126,7 @@ input {
   margin: 0;
   border: none;
   border-radius: 0;
-  width: 75%;
+  width: 65%;
   padding: 10px;
   float: left;
   font-size: 16px;
@@ -131,7 +134,7 @@ input {
 
 .addBtn {
   padding: 10px;
-  width: 25%;
+  width: 35%;
   background: #d9d9d9;
   color: #555;
   float: left;
@@ -140,27 +143,29 @@ input {
   cursor: pointer;
   transition: 0.3s;
   border-radius: 0;
+  height: 6%;
 }
 
 .addBtn:hover {
   background-color: #bbb;
 }
-.container{
-	width: 40%;
-	min-width: 450px;
 
-	position: fixed;
-    top: 50px;
-    margin: auto;
-	background: white;
-	min-height:100px;
-	border-radius: 10px;
-	
-	
+.container {
+  width: 40%;
+  height: 100%;
+  min-width: 450px;
+
+  top: 50px;
+  margin: auto;
+  background: white;
+  // min-height:100px;
+  border-radius: 10px;
+
+
 }
 
- 
-.editable-text{
+
+.editable-text {
   cursor: pointer;
   border-bottom: 1px dotted #000;
 }
@@ -168,16 +173,16 @@ input {
 .editable-text:hover {
   background-color: #eee;
 }
-.edit-Page{
-	 margin: 0;
-  
-}
-.container1{
-	background-color: green;
-	border: soft red:
-	
+
+.edit-Page {
+  margin: 0;
+
 }
 
+.container1 {
+  background-color: green;
+  border: soft red:
+}
 
 
 
@@ -186,15 +191,20 @@ input {
 
 
 
+.popup-container {
+  display: flex;
+  justify-content: center;
+  align: center;
+}
 
 
 .popup {
-  width: 80%;
+  width: 50%;
   padding: 15px;
   margin: auto;
-  border: 1px solid rgb(100,82,73);
+  border: 1px solid rgb(100, 82, 73);
   border-radius: 30px;
-  color: rgb(1,82,73);
+  color: rgb(1, 82, 73);
   background: white;
   position: absolute;
   top: 15%;
@@ -202,8 +212,13 @@ input {
   z-index: 10001;
   font-weight: 700;
   text-align: center;
-  
+
 }
+
+.overlay-container {
+  background: rgba(0, 0, 0, .85);
+}
+
 
 .overlay {
   margin: auto;
@@ -213,15 +228,15 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,.85);
+  background: rgba(0, 0, 0, .85);
   z-index: 1000;
-  display :none;
+  display: none;
   margin: auto;
 }
 
 
 .dialog-btn {
-  background-color:#44B78B;
+  background-color: #44B78B;
   color: white;
   font-weight: 700;
   border: 2px solid #44B78B;
@@ -229,7 +244,13 @@ input {
   height: 30px;
   width: 30%;
 }
+
 .dialog-btn:hover {
-  background-color:red;
+  background-color: red;
   cursor: pointer;
+}
+
+.todos-list {
+  height: 400px;
+  overflow: scroll;
 }
